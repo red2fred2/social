@@ -7,12 +7,11 @@ const gulp   = require('gulp'),
       concat = require('gulp-concat'),
 			sass   = require('gulp-sass'),
       minjs  = require('gulp-minify'),
-      mincss = require('gulp-cssmin')
+      mincss = require('gulp-cssmin'),
+      inline = require('gulp-inline')
 
 //tasks
-gulp.task('clean', ()=>
-          del('./build/*')
-         )
+gulp.task('clean', ()=> del('./build/*'))
 
 gulp.task('compile js', ['clean'], ()=>
           gulp.src('./source/js/*.js')
