@@ -11,15 +11,15 @@ const gulp   = require('gulp'),
       inline = require('gulp-inline')
 
 //tasks
-gulp.task('clean', ()=> del('./build/*'))
+gulp.task('clean build', ()=> del('./build/*'))
 
-gulp.task('compile js', ['clean'], ()=>
+gulp.task('compile js', ['clean build'], ()=>
           gulp.src('./source/js/*.js')
           .pipe(concat('app.js'))
           .pipe(gulp.dest('./build/js/'))
          )
 
-gulp.task('compile sass', ['clean'], ()=>
+gulp.task('compile sass', ['clean build'], ()=>
           gulp.src('./source/sass/app.sass')
           .pipe(sass())
           .pipe(gulp.dest('./build/css'))
@@ -36,9 +36,14 @@ gulp.task('minify css', ['compile sass'], ()=>
           .pipe(mincss())
           .pipe(gulp.dest('./build/cssmin'))
          )
-          
-//gulp.task('inline', require('./gulp/inline.js'))
-//gulp.task('minify html', require('./gulp/minifyHTML'))
+
+gulp.task('clean view', ()=> del('./view/*'))
+
+gulp.task('inline', ['minify css', 'minify js', 'clean view'], ()=>
+          gulp.src('./source/html/index.html')
+          .pipe(inline({base: 'build/'}))
+          .pipe(gulp.dest('./view'))
+         )
 
 //default task
-gulp.task('default', ['clean', 'compile js', 'compile sass', 'minify js', 'minify css'])
+gulp.task('default', ['inline'])
