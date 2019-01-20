@@ -6,7 +6,8 @@ const gulp   = require('gulp'),
 			del    = require('del'),
       concat = require('gulp-concat'),
 			sass   = require('gulp-sass'),
-      minifyjs = require('gulp-minify')
+      minjs  = require('gulp-minify'),
+      mincss = require('gulp-cssmin')
 
 //tasks
 gulp.task('clean', ()=>
@@ -27,13 +28,18 @@ gulp.task('compile sass', ['clean'], ()=>
 
 gulp.task('minify js', ['compile js'], ()=>
           gulp.src('./build/js/app.js')
-          .pipe(minifyjs())
-          .pipe(gulp.dest('./build/jsmin'))
+          .pipe(minjs())
+          .pipe(gulp.dest('./build/js'))
          )
 
-//gulp.task('minify css', require('./gulp/minifyCSS'))
+gulp.task('minify css', ['compile sass'], ()=>
+          gulp.src('./build/css/app.css')
+          .pipe(mincss())
+          .pipe(gulp.dest('./build/cssmin'))
+         )
+          
 //gulp.task('inline', require('./gulp/inline.js'))
 //gulp.task('minify html', require('./gulp/minifyHTML'))
 
 //default task
-gulp.task('default', ['clean', 'compile js', 'compile sass', 'minify js'])
+gulp.task('default', ['clean', 'compile js', 'compile sass', 'minify js', 'minify css'])
