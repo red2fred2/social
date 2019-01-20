@@ -1,33 +1,27 @@
-const gulp        = require('gulp'),
-			runSequence = require('run-sequence'),
-			del					= require('del')
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-//import external code
-const MinifyHTML  = require('./gulp/minifyHTML'),
-			CompileSCSS = require('./gulp/compileSCSS'),
-			MinifyCSS   = require('./gulp/minifyCSS'),
-			CompileJS   = require('./gulp/compileJS'),
-			MinifyJS    = require('./gulp/minifyJS'),
-			Inline      = require('./gulp/inline.js')
-
-//////////////////////////////////////////////////////////////////////
+const gulp = require('gulp'),
+			del  = require('del')
 
 //simple tasks
-gulp.task('minify html', MinifyHTML('./build/', './build/'))
+//gulp.task('minify html', require('./gulp/minifyHTML'))
 
 gulp.task('clean build', () => del('./build/**'))
 
-gulp.task('compile sass', CompileSCSS('./source/', './build/'))
-gulp.task('minify css', MinifyCSS('./build/', './build/'))
+gulp.task('compile sass', require('./gulp/compileSASS'))
+//gulp.task('minify css', require('./gulp/minifyCSS'))
 
-gulp.task('compile js', CompileJS('./source/', './build/'))
-gulp.task('minify js', MinifyJS('./build/', './build/'))
+gulp.task('compile js', require('./gulp/compileJS'))
+//gulp.task('minify js', require('./gulp/minifyJS'))
 
-gulp.task('inline', Inline('./build/', './view/'))
+//gulp.task('inline', require('./gulp/inline.js'))
 
 //task groups
-gulp.task('build css', runSequence('compile sass', 'minify css'))
-gulp.task('build js', runSequence('compile js', 'minify js'))
-gulp.task('build html', runSequence('build css', 'build js', 'inline'))
+//gulp.task('build css', runSequence('compile sass', 'minify css'))
+//gulp.task('build js', runSequence('compile js', 'minify js'))
+//gulp.task('build html', runSequence('build css', 'build js', 'inline'))
 
-gulp.task('default', runSequence('clean build', 'build html'))
+//default task
+gulp.task('default', ['clean build', 'compile sass'])
