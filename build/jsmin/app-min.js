@@ -1,0 +1,1 @@
+const appapplicationThisIsAStipidlylongvariablenamepleasegodJUSTFUCKINGCOMPRESSthisNAME=3;console.log(3);const apple=5;for(var i=0;i<20;i++)console.log(5);

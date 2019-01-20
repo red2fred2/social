@@ -2,23 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-//import libraries
-const 
-			gulp  = require('gulp'),
-      jsmin = require('gulp-jsmin')
+const gulp  = require('gulp'),
+      uglify = require('gulp-uglify')
 
-//constants
-const
-			SELECTOR_STRING = 'main.js'
-
-//////////////////////////////////////////////////////////////////////
-
-module.exports = function(inputFolder, outputFolder) {
-  gulp.src(inputFolder + SELECTOR_STRING)
-	.pipe(
-    jsmin()
-  )
-	.pipe(
-    gulp.dest(outputFolder)
-  )
-}
+module.exports = () =>
+gulp.src('./build/js/app.js')
+.pipe(uglify())
+.pipe(gulp.dest('./build/minjs'))

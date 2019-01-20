@@ -13,7 +13,9 @@
     "gulp-htmlmin": "^5.0.1",
     "gulp-inline": "^0.1.3",
     "gulp-jsmin": "^0.1.5",
+    "gulp-minify": "^3.1.0",
     "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.1",
     "run-sequence": "^2.2.1"
   },
   "devDependencies": {},
@@ -25,6 +27,7 @@
     "url": "git+https://github.com/red2fred2/social.git"
   },
   "author": "red2fred2",
+  "license": "MPL-2.0",
   "bugs": {
     "url": "https://github.com/red2fred2/social/issues"
   },
