@@ -8,7 +8,7 @@ const gulp = require('gulp'),
 //simple tasks
 //gulp.task('minify html', require('./gulp/minifyHTML'))
 
-gulp.task('clean build', () => del('./build/**'))
+gulp.task('clean build', () => del('./build/*'))
 
 gulp.task('compile sass', require('./gulp/compileSASS'))
 //gulp.task('minify css', require('./gulp/minifyCSS'))
@@ -24,4 +24,4 @@ gulp.task('compile js', require('./gulp/compileJS'))
 //gulp.task('build html', runSequence('build css', 'build js', 'inline'))
 
 //default task
-gulp.task('default', ['clean build', 'compile sass'])
+gulp.task('default', ['clean build', 'compile js', 'compile sass'])

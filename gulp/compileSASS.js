@@ -6,5 +6,5 @@ const gulp   = require('gulp'),
 			sass   = require('gulp-sass')
 module.exports = () =>
 gulp.src('./source/sass/app.sass')
-.pipe(sass().on('error', sass.logError))
+.pipe(sass())
 .pipe(gulp.dest('./build/css'))
