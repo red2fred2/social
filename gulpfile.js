@@ -39,11 +39,23 @@ gulp.task('minify css', ['compile sass'], ()=>
 
 gulp.task('clean view', ()=> del('./view/*'))
 
-gulp.task('inline', ['minify css', 'minify js', 'clean view'], ()=>
+gulp.task('inline', ['minify css', 'minify js'], ()=>
           gulp.src('./source/html/index.html')
           .pipe(inline({base: 'build/'}))
           .pipe(gulp.dest('./view'))
          )
 
+gulp.task('minify service worker', ['inline'], ()=>
+          gulp.src('./source/service worker/serviceworker.js')
+          .pipe(minjs(
+            {ext:{
+              src:'-debug.js',
+              min:'.js'
+            }}
+          ))
+          .pipe(gulp.dest('./view'))
+         )
+
+
 //default task
-gulp.task('default', ['inline'])
+gulp.task('default', ['inline', 'minify service worker'])
