@@ -3,4 +3,4 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 const apple = app + 2
-for(var i = 0; i < 20; i++) console.log(apple)
+for(var i = 0; i < apple; i++) console.log(apple)
