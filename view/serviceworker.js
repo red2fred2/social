@@ -1,1 +1,1 @@
-const a=5;
+const CACHE="v1",cacheURLs=["/"];self.addEventListener("install",function(e){e.waitUntil(caches.open("v1").then(function(e){return e.addAll(cacheURLs)}))}),self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(n){return n?(caches.delete("v1"),caches.open("v1").then(function(e){e.addAll(cacheURLs)}),n):fetch(e.request)}))});
