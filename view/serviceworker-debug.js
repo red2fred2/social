@@ -8,7 +8,6 @@
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE).then(function(cache) {
-      console.log(`Opened cache ${CACHE}`)
       return cache.addAll(cacheURLs)
     })
   )
@@ -18,17 +17,13 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function(response) {
       if(response) {
-        console.log('service worker returned cached file')
         
         caches.delete(CACHE)
-        caches.open(CACHE).then((cache)=>
+        caches.open(CACHE).then(function(cache) {
           cache.addAll(cacheURLs)
-          //cache.put(event.request.url, fetch(event.request))
-        )
-        
+        })
         return response
       } else {
-        console.log('service worker returned network file')
         return fetch(event.request)
       }
     })
